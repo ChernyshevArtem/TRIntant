@@ -1,0 +1,47 @@
+﻿<Window x:Class="TRIntant.Windows.EditAddStudentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TRIntant"
+        mc:Ignorable="d"
+        Title="Редактирование\Добавление ученика" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    x:Name="spDataStudentEntity"
+                    VerticalAlignment="Center" 
+                    Orientation="Vertical">
+            <TextBlock Text="Фамилия" 
+                       HorizontalAlignment="Center"/>
+            <TextBox Text= "{Binding Path = фамилия, TargetNullValue = ''}"
+                     Padding="5"
+                     Width="150"/>
+            <TextBlock Text="Имя"
+                       HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Path = имя, TargetNullValue = ''}"
+                     Padding="5"
+                     Width="150"/>
+            <TextBlock Text="Отчество"
+                       HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Path = отчество, TargetNullValue = ''}" 
+                     Padding="5"
+                     Width="150"/>
+            <TextBlock Text="Класс"
+                       HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Path = класс, TargetNullValue = ''}" 
+                     Padding="5"
+                     Width="150"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Button x:Name="CloseEditTeacher"
+                    Content="Сохранить изменения"
+                    Width="130" 
+                    VerticalAlignment="Center"
+                    Click="btCloseEditStudent_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

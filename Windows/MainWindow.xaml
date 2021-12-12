@@ -1,0 +1,184 @@
+﻿<Window x:Class="TRIntant.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TRIntant"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="3*"/>
+            <ColumnDefinition Width ="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" 
+                        x:Name="btPrintTeacher"
+                        Content="Вывести список преподавателей"
+                        FontSize="14" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Click="btPrintTeacher_Click">
+                </Button>
+                <Button Grid.Column="1" 
+                        x:Name="btPrintStudents"
+                        Content="Вывести список учеников"
+                        FontSize="14" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" 
+                        Click="btPrintStudents_Click"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+                <ListView Grid.Column="0"
+                          x:Name ="lvTeacher"
+                          Margin="10,10" 
+                          FontSize="10">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="id" 
+                                            DisplayMemberBinding="{Binding Path = id}" 
+                                            Width="30"/>
+                            <GridViewColumn Header="Фамилия" 
+                                            DisplayMemberBinding="{Binding Path = фамилия, TargetNullValue='не задано'}" 
+                                            Width="70"/>
+                            <GridViewColumn Header="Имя" 
+                                            DisplayMemberBinding="{Binding Path = имя, TargetNullValue='не задано'}" 
+                                            Width="50"/>
+                            <GridViewColumn Header="Отчество" 
+                                            DisplayMemberBinding="{Binding Path = отчество, TargetNullValue='не задано'}" 
+                                            Width="70"/>
+                            <GridViewColumn Header="Кабинет" 
+                                            DisplayMemberBinding="{Binding Path = кабинет, TargetNullValue='не задано'}" 
+                                            Width="55"/>
+                            <GridViewColumn Header="Класс" 
+                                            DisplayMemberBinding="{Binding Path = класс, TargetNullValue='не задано'}" 
+                                            Width="50"/>
+                            <GridViewColumn Header="Предмет"
+                                            DisplayMemberBinding="{Binding Path = предмет, TargetNullValue='не задано'}" 
+                                            Width="75"/>
+                            <GridViewColumn Header="Дата и время урока" 
+                                            DisplayMemberBinding="{Binding Path = дата_и_время_урока, TargetNullValue='не задано', StringFormat='dd.MM.yyyy HH:mm'}" 
+                                            Width="110"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView Grid.Column="1"
+                          x:Name ="lvStudent"
+                          Margin="10,10"
+                          FontSize="10">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="id" 
+                                            DisplayMemberBinding="{Binding Path = id, TargetNullValue='не задано'}" Width="30"/>
+                            <GridViewColumn Header="Фамилия" 
+                                            DisplayMemberBinding="{Binding Path = фамилия, TargetNullValue='не задано'}" Width="80"/>
+                            <GridViewColumn Header="Имя" 
+                                            DisplayMemberBinding="{Binding Path = имя, TargetNullValue='не задано'}" Width="60"/>
+                            <GridViewColumn Header="Отчество" 
+                                            DisplayMemberBinding="{Binding Path = отчество, TargetNullValue='не задано'}" Width="80"/>
+                            <GridViewColumn Header="Класс" 
+                                            DisplayMemberBinding="{Binding Path = класс, TargetNullValue='не задано'}" Width="80"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1"
+              Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="2"
+                    BorderBrush="Black" 
+                    BorderThickness="1"
+                    VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text = "Удаление из базы данных" 
+                           HorizontalAlignment="Center"
+                           Padding="5"/>
+                    <RadioButton Content="Удалить преподавателя"
+                             x:Name="rbRemoveTeacher"
+                             Margin="5,0"/>
+                    <RadioButton Content="Удалить ученика"
+                             x:Name="rbRemoveStudent"
+                             Margin="5,0"/>
+                    <TextBox Text="Введите id удаляемой сущности"
+                         Margin="10,5"
+                         x:Name="tbRemoveId"
+                         PreviewMouseDown="tbRemoveId_PreviewMouseDown"
+                         ToolTip="Введите id удаляемой сущности"/>
+                    <Button Content="Удалить"
+                        x:Name="btRemove"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Margin="0,5" 
+                        Click="btRemove_Click"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="1"
+                    BorderBrush="Black" 
+                    BorderThickness="1"
+                    VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Редактирование базы данных"
+                               HorizontalAlignment="Center"
+                               Padding="5"/>
+                    <RadioButton Content="Редактировать преподавателя"
+                                 x:Name="rbEditTeacher"
+                                 Margin="5,0"/>
+                    <RadioButton Content="Редактировать ученика"
+                                 x:Name="rbEditStudent"
+                                 Margin="5,0"/>
+                    <TextBox Text="Введите id редактируемой сущности"
+                             Margin="10,5"
+                             x:Name="tbEditId"
+                             PreviewMouseDown="tbEditId_PreviewMouseDown"
+                             ToolTip="Введите id редактируемой сущности"/>
+                    <Button Content="Редактировать"
+                            x:Name="btEdit"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Margin="0,5" 
+                            Click="btEdit_Click"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="0"
+                    BorderBrush="Black" 
+                    BorderThickness="1"
+                    VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Добавление в базу данных"
+                               HorizontalAlignment="Center"
+                               Padding="5"/>
+                    <RadioButton Content="Добавить преподавателя"
+                                 x:Name="rbAddTeacher"
+                                 Margin="5,0"/>
+                    <RadioButton Content="Добавить ученика"
+                                 x:Name="rbAddStudent"
+                                 Margin="5,0"/>
+                    <Button Content="Добавить"
+                            x:Name="btAdd"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Margin="0,5" 
+                            Click="btAdd_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
